@@ -1,10 +1,11 @@
-﻿
+﻿@using RealEstateLog.Entity
+
+@model List<Customer>
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
-
 
 <div class="content-wrapper">
     <div class="content">
@@ -13,44 +14,84 @@
                 <div class="card-header pb-0 p-3">
                     <div class="row">
                         <div class="col-md-8 d-flex align-items-center">
-                            <h6 class="mb-0 text-dark">Müşteri Ekleme</h6>
+                            <h6 class="mb-0 text-dark">Müşteriler</h6>
                         </div>
                     </div>
                 </div>
-                <div class="card-body p-3">
-                    <hr class="horizontal gray-light my-0">
-                    <form method="post" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label>Rota</label>
-                            <input type="text" class="form-control form-control-s"  placeholder="Rotayı girin">
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form asp-action="Index" method="get" asp-controller="Customer">
+                                        <div class="align-middle">
+                                            <span>Aramak istediğiniz müşteri bilgisini giriniz..</span>
+                                            <div class="align-middle align-self-center align-items-center mt-2">
+                                                <input class="mb-3 rounded align-middle" name="searchString" value="@ViewData["CurrentFilter"]" />
+                                                &nbsp;
+                                                <input type="submit" value="Müşteri Ara" class="btn btn-primary" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Kaç Gece / Kaç Gün ?</label>
-                            <input type="text" class="form-control form-control-s"  placeholder="Gün / Gece bilgisini girin">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-sub">
+                                        Müşterileri bu sayfada görüntüleyebilir veya güncelleyebilirsiniz.
+                                    </div>
+                                    <br />
+                                    <table class="table align-items-center table-striped mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-uppercase text-primary text-sm font-weight-bolder ">Müşteri No</th>
+                                                <th class="text-uppercase text-primary text-sm font-weight-bolder ">Müşteri Adı Soyadı</th>
+                                                <th class="text-uppercase text-primary text-sm font-weight-bolder ">Müşteri Telefonu</th>
+                                                <th class="text-uppercase text-primary text-sm font-weight-bolder ">Açıklama</th>
+                                                <th class="text-uppercase text-primary text-sm font-weight-bolder text-center">Sil</th>
+                                                <th class="text-uppercase text-primary text-sm font-weight-bolder text-center">Güncelle</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="border-top">
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td class="align-middle" width="130px">
+                                                        <p class="text-s  mb-0">@item.CustomerID</p>
+                                                    </td>
+                                                    <td class="align-middle" width="300px">
+                                                        <span class="text-s  mb-0">@item.CustomerFullName </span>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <span class=" text-s  mb-0">@item.CustomerPhone</span>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <span class=" text-s  mb-0">@item.CustomerDescription</span>
+                                                    </td>
+                                                    <td width="60px" class="align-middle">
+                                                        <a href="/Customer/DeleteCustomer/@item.CustomerID" class="btn bg-gradient-danger ">Sil</a>
+                                                    </td>
+                                                    <td width="80px" class="align-middle">
+                                                        <a href="/Customer/UpdateCustomer/@item.CustomerID" class="btn bg-gradient-success ">Güncelle</a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                    <br />
+                                    <div>
+                                        <a href="/Customer/CreateCustomer/" class="btn btn-primary">Yeni Müşteri Oluşturun</a>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Fiyat</label>
-                            <input type="text" class="form-control form-control-s"  placeholder="Rota fiyatını girin">
-                        </div>
-                        <div class="form-group">
-                            <label>Kapasite</label>
-                            <input type="text" class="form-control form-control-s"  placeholder="Rota kapasitesini girin">
-                        </div>
-                        <div class="form-group">
-                            <label>Açıklama</label>
-                            <input type="text" class="form-control form-control-s"  placeholder="Rota açıklamasını girin">
-                        </div>
-                        <div class="form-group">
-                            <label>Detay-1</label>
-                            <input type="text" class="form-control form-control-s"  placeholder="Rotanın 1.detayını girin">
-                        </div>
-                        <div class="form-group">
-                            <label>Detay-2</label>
-                            <input type="text" class="form-control form-control-s"  placeholder="Rotanın 2.detayını girin">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Rota Oluştur</button>
-                    </form>
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
