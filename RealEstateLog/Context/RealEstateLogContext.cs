@@ -7,7 +7,7 @@ public class RealEstateLogContext : DbContext
 {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseSqlServer("server=DESKTOP-A6C5CRN\\MSSQLSERVER01;database=RealEstateLogDb;Trusted_Connection=True;TrustServerCertificate=true");
+        optionsBuilder.UseSqlServer("server=77.245.159.27\\MSSQLSERVER2019;database=RealEstateDb;user=RealAdmin;password=Kguven1423.");
     }
     public DbSet<Customer> Customers { get; set; }
 }
