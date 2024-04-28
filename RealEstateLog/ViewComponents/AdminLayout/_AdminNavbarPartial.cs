@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace TraversalYoutube.PresentationLayer.ViewComponents.AdminLayout;
+namespace RealEstateLog.ViewComponents.AdminLayout;
 
-public class _AdminNavbarPartial :ViewComponent
+public class _AdminNavbarPartial : ViewComponent
 {
     public IViewComponentResult Invoke()
     {

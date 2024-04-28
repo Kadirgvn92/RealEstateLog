@@ -3,10 +3,8 @@ using RealEstateLog.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddEntityFrameworkNpgsql().AddDbContext<RealEstateLogContext>(opt =>
-{
-    opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
+
+builder.Services.AddDbContext<RealEstateLogContext>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 

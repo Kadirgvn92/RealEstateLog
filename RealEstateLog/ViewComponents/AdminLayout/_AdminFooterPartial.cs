@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace TraversalYoutube.PresentationLayer.ViewComponents.AdminLayout;
+namespace RealEstateLog.ViewComponents.AdminLayout;
 
-public class _AdminFooterPartial :ViewComponent
+public class _AdminFooterPartial : ViewComponent
 {
     public IViewComponentResult Invoke()
     {
-        return View();  
+        return View();
     }
 }
