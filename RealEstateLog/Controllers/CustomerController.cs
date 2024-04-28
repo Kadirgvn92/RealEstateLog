@@ -80,4 +80,53 @@ public class CustomerController : Controller
         }
         return View();
     }
+    [HttpGet]
+    public IActionResult UpdateCustomer(int id)
+    {
+        var values = _context.Customers.Where(x => x.CustomerID == id).FirstOrDefault();
+        if (values != null)
+        {
+            UpdateCustomerViewModel model = new UpdateCustomerViewModel
+            {
+                CustomerID = id,
+                CustomerAddress = values.CustomerAddress,
+                CustomerDescription = values.CustomerDescription,
+                CustomerFullName = values.CustomerFullName,
+                CustomerPhone = values.CustomerPhone,
+                CustomerPrice = values.CustomerPrice,
+                CustomerType = values.CustomerType,
+                FSBODate = values.FSBODate,
+                ListingDate = values.ListingDate,
+                ListingNumber = values.ListingNumber,
+                ListingRoomCount = values.ListingRoomCount,
+                NextCallDate = values.NextCallDate,
+            };
+            return View(model);
+        }
+        return View();
+    }
+    [HttpPost]
+    public IActionResult UpdateCustomer(UpdateCustomerViewModel model)
+    {
+        var values = _context.Customers.Where(x => x.CustomerID == model.CustomerID).FirstOrDefault();
+        if (ModelState.IsValid)
+        {
+            values.CustomerFullName = model.CustomerFullName;
+            values.CustomerPhone = model.CustomerPhone;
+            values.CustomerPrice = model.CustomerPrice;
+            values.CustomerType = model.CustomerType;
+            values.CustomerAddress = model.CustomerAddress;
+            values.CustomerDescription = model.CustomerDescription;
+            values.FSBODate = model.FSBODate;
+            values.ListingDate = model.ListingDate;
+            values.ListingNumber = model.ListingNumber;
+            values.ListingRoomCount = model.ListingRoomCount;
+            values.NextCallDate = model.NextCallDate;
+
+            _context.Customers.Update(values);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        return View();
+    }
 }
